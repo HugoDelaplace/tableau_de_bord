@@ -4,11 +4,12 @@
     $file = './data/pokedex.json';
     $data = file_get_contents($file);
     $obj = json_decode($data);
-    $truc = array();
+    $truc = null;
     if (!empty($_GET['q'])){
         foreach ($obj as $pokemon){
             if (($pokemon->name) == $_GET['q']){
-                $truc[$pokemon->name] = 
+                $truc = $pokemon;
+                break;
             }
         }
     }
@@ -42,7 +43,8 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($obj as $poke): ?>
+            <?php if ($truc == null):
+                foreach ($obj as $poke): ?>
                 <tr>
                     <td>
                         <?= $poke->name ?>
@@ -64,6 +66,28 @@
                     </td>
                 </tr>
             <?php endforeach ?>
+            <?php else:?>
+                    <tr>
+                        <td>
+                            <?= $truc->name ?>
+                        </td>
+                        <td>
+                            <?= $truc->type1 ?>
+                        </td>
+                        <td>
+                            <?= $truc->type2 ?>
+                        </td>
+                        <td>
+                            <?= $truc->description ?>
+                        </td>
+                        <td>
+                            <?= $truc->weight ?> kg
+                        </td>
+                        <td>
+                            <?= $truc->height ?> m
+                        </td>
+                    </tr>
+            <php? endif ?>
         </tbody>
     </table>
 </body>
