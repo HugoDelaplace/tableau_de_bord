@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="fr">
-
+<?php
+    $file = './data/pokedex.json';
+    $data = file_get_contents($file);
+    $obj = json_decode($data);
+    $truc = array();
+    if (!empty($_GET['q'])){
+        foreach ($obj as $pokemon){
+            if (($pokemon->name) == $_GET['q']){
+                $truc[$pokemon->name] = 
+            }
+        }
+    }
+    ?>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,12 +22,14 @@
     <title>Pokédex</title>
 </head>
 
-<body>
-    <?php
-    $file = './data/pok.json';
-    $data = file_get_contents($file);
-    $obj = json_decode($data);
-    ?>
+<body class="p-4">
+    <h1>Pokédex</h1>
+    <form action="" class="mb-4">
+        <div class="form-group">
+            <input type="text" class="form-control" name="q"> 
+        </div>
+        <button class="btn btn-primary">Rechercher</button>
+    </form>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -43,10 +57,10 @@
                         <?= $poke->description ?>
                     </td>
                     <td>
-                        <?= $poke->weight ?>
+                        <?= $poke->weight ?> kg
                     </td>
                     <td>
-                        <?= $poke->height ?>
+                        <?= $poke->height ?> m
                     </td>
                 </tr>
             <?php endforeach ?>
