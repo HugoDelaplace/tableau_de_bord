@@ -4,12 +4,12 @@
     $file = './data/pokedex.json';
     $data = file_get_contents($file);
     $obj = json_decode($data);
-    $truc = null;
+    $truc = array();
     if (!empty($_GET['q'])){
         foreach ($obj as $pokemon){
-            if (($pokemon->name) == $_GET['q']){
-                $truc = $pokemon;
-                break;
+            $elem = array();
+            if (strpos($pokemon->name, $_GET['q']) !== false){
+                array_push($truc, $pokemon);
             }
         }
     }
@@ -43,8 +43,8 @@
             </tr>
         </thead>
         <tbody>
-            <?php if ($truc == null):
-                foreach ($obj as $poke): ?>
+            <?php if (empty($truc)): ?>
+            <?php foreach ($obj as $poke): ?>
                 <tr>
                     <td>
                         <?= $poke->name ?>
@@ -66,30 +66,31 @@
                     </td>
                 </tr>
             <?php endforeach ?>
-            <?php else:?>
+            <?php else: ?>
+                <?php foreach ($truc as $poke): ?>
                     <tr>
                         <td>
-                            <?= $truc->name ?>
+                            <?= $poke->name ?>
                         </td>
                         <td>
-                            <?= $truc->type1 ?>
+                            <?= $poke->type1 ?>
                         </td>
                         <td>
-                            <?= $truc->type2 ?>
+                            <?= $poke->type2 ?>
                         </td>
                         <td>
-                            <?= $truc->description ?>
+                            <?= $poke->description ?>
                         </td>
                         <td>
-                            <?= $truc->weight ?> kg
+                            <?= $poke->weight ?> kg
                         </td>
                         <td>
-                            <?= $truc->height ?> m
+                            <?= $poke->height ?> m
                         </td>
                     </tr>
-            <php? endif ?>
+                <?php endforeach ?>
+            <?php endif ?>
         </tbody>
     </table>
 </body>
-
 </html>
