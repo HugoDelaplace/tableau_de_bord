@@ -6,10 +6,19 @@
     $obj = json_decode($data);
     $truc = array();
     if (!empty($_GET['q'])){
-        foreach ($obj as $pokemon){
-            $elem = array();
-            if (strpos($pokemon->name, $_GET['q']) !== false){
-                array_push($truc, $pokemon);
+        if (!empty($_GET['rch'])){
+            foreach ($obj as $pokemon){
+                $elem = array();
+                if ($_GET['rch'] == "nom"){
+                    if (strpos($pokemon->name, $_GET['q']) !== false){
+                        array_push($truc, $pokemon);
+                    }
+                }
+                elseif ($_GET['rch'] == "type"){
+                    if (strpos($pokemon->type1, $_GET['q']) !== false | strpos($pokemon->type2, $_GET['q']) !== false){
+                        array_push($truc, $pokemon);
+                    }
+                }
             }
         }
     }
@@ -30,6 +39,11 @@
             <input type="text" class="form-control" name="q"> 
         </div>
         <button class="btn btn-primary">Rechercher</button>
+        <p>Rechercher par :</p>
+        <select name="rch" id="rch">
+            <option value="nom">Nom</option>
+            <option value="type">Type</option>
+        </select>
     </form>
     <table class="table table-striped">
         <thead>
@@ -50,10 +64,10 @@
                         <?= $poke->name ?>
                     </td>
                     <td>
-                        <?= $poke->type1 ?>
+                        <?= '<p class="type">'.$poke->type1.'</p>' ?>
                     </td>
                     <td>
-                        <?= $poke->type2 ?>
+                        <?= '<p class="type">'.$poke->type2.'</p>' ?>
                     </td>
                     <td>
                         <?= $poke->description ?>
@@ -73,10 +87,10 @@
                             <?= $poke->name ?>
                         </td>
                         <td>
-                            <?= $poke->type1 ?>
+                            <?= '<p class="type">'.$poke->type1.'</p>' ?>
                         </td>
                         <td>
-                            <?= $poke->type2 ?>
+                            <?= '<p class="type">'.$poke->type2.'</p>' ?>
                         </td>
                         <td>
                             <?= $poke->description ?>
@@ -94,3 +108,83 @@
     </table>
 </body>
 </html>
+
+<script>
+    var types = document.getElementsByClassName("type");
+    for (let i = 0; i<types.length; i++){
+        types[i].style.textAlign = 'center';
+        types[i].style.borderRadius = '2em'
+        if (types[i].textContent == "Grass"){
+            types[i].style.backgroundColor = '#7BCE52';
+            types[i].style.color = 'white';
+        }
+        if (types[i].textContent == "Fire"){
+            types[i].style.backgroundColor = '#F75231';
+            types[i].style.color = 'white';
+        }
+        if (types[i].textContent == "Water"){
+            types[i].style.backgroundColor = '#399CFF';
+            types[i].style.color = 'white';
+        }
+        if (types[i].textContent == "Poison"){
+            types[i].style.backgroundColor = '#B55AA5';
+            types[i].style.color = 'white';
+        }
+        if (types[i].textContent == "Electric"){
+            types[i].style.backgroundColor = '#FFC631';
+            types[i].style.color = 'white';
+        }
+        if (types[i].textContent == "Normal"){
+            types[i].style.backgroundColor = '#ADA594';
+            types[i].style.color = 'white';
+        }
+        if (types[i].textContent == "Bug"){
+            types[i].style.backgroundColor = '#ADBD21';
+            types[i].style.color = 'white';
+        }
+        if (types[i].textContent == "Fighting"){
+            types[i].style.backgroundColor = '#A55239';
+            types[i].style.color = 'white';
+        }
+        if (types[i].textContent == "Psychic"){
+            types[i].style.backgroundColor = '#FF73A5';
+            types[i].style.color = 'white';
+        }
+        if (types[i].textContent == "Ground"){
+            types[i].style.backgroundColor = '#D6B55A';
+            types[i].style.color = 'white';
+        }
+        if (types[i].textContent == "Rock"){
+            types[i].style.backgroundColor = '#BDA55A';
+            types[i].style.color = 'white';
+        }
+        if (types[i].textContent == "Flying"){
+            types[i].style.backgroundColor = '#9CADF7';
+            types[i].style.color = 'white';
+        }
+        if (types[i].textContent == "Ghost"){
+            types[i].style.backgroundColor = '#6363B5';
+            types[i].style.color = 'white';
+        }
+        if (types[i].textContent == "Ice"){
+            types[i].style.backgroundColor = '#5ACEE7';
+            types[i].style.color = 'white';
+        }
+        if (types[i].textContent == "Dragon"){
+            types[i].style.backgroundColor = '#8858F6';
+            types[i].style.color = 'white';
+        }
+        if (types[i].textContent == "Steel"){
+            types[i].style.backgroundColor = '#ADADC6';
+            types[i].style.color = 'white';
+        }
+        if (types[i].textContent == "Dark"){
+            types[i].style.backgroundColor = '#735A4A';
+            types[i].style.color = 'white';
+        }
+        if (types[i].textContent == "Fairy"){
+            types[i].style.backgroundColor = '#E09AE3';
+            types[i].style.color = 'white';
+        }
+    }
+</script>
