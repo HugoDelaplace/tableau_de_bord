@@ -29,6 +29,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/style.css">
     <title>Pokédex</title>
 </head>
 
@@ -45,7 +46,7 @@
             <option value="type">Type</option>
         </select>
     </form>
-    <table class="table table-striped">
+    <table class="tablepoke">
         <thead>
             <tr>
                 <th>Nom</th>
@@ -113,7 +114,8 @@
     var types = document.getElementsByClassName("type");
     for (let i = 0; i<types.length; i++){
         types[i].style.textAlign = 'center';
-        types[i].style.borderRadius = '2em'
+        types[i].style.borderRadius = '2em';
+        types[i].style.margin = '0%';
         if (types[i].textContent == "Grass"){
             types[i].style.backgroundColor = '#7BCE52';
             types[i].style.color = 'white';
