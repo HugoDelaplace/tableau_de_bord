@@ -10,12 +10,12 @@
             foreach ($obj as $pokemon){
                 $elem = array();
                 if ($_GET['rch'] == "nom"){
-                    if (strpos(strtolower($pokemon->name), $_GET['q']) !== false){
+                    if (strpos(strtolower($pokemon->name), strtolower($_GET['q'])) !== false){
                         array_push($truc, $pokemon);
                     }
                 }
                 elseif ($_GET['rch'] == "type"){
-                    if (strpos(strtolower($pokemon->type1), $_GET['q']) !== false | strpos(strtolower($pokemon->type2), $_GET['q']) !== false){
+                    if (strpos(strtolower($pokemon->type1), strtolower($_GET['q'])) !== false | strpos(strtolower($pokemon->type2), strtolower($_GET['q'])) !== false){
                         array_push($truc, $pokemon);
                     }
                 }
