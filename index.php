@@ -37,9 +37,9 @@
     <h1>Pokédex</h1>
     <form action="" class="mb-4">
         <div class="form-group">
-            <input type="text" class="form-control" name="q"> 
+            <input type="text" class="recherches" name="q"> 
         </div>
-        <button class="btn btn-primary">Rechercher</button>
+        <button class="btn">Rechercher</button>
         <p>Rechercher par :</p>
         <select name="rch" id="rch">
             <option value="nom">Nom</option>

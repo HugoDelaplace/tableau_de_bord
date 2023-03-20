@@ -1,6 +1,6 @@
 #rch {
-    background-color : orange;
-    color : white;
+    background-color: orange;
+    color: white;
     border-radius: 1em;
     font-size: large;
     font-style: italic;
@@ -17,12 +17,69 @@ body {
     height: 100%;
 }
 
-.tablepoke, th, td {
+.tablepoke,
+th,
+td {
     border-bottom: 1px solid white;
     font-size: large;
 }
 
-th, td {
+th,
+td {
     padding-left: 5em;
     padding-right: 5em;
+}
+
+h1 {
+    text-align: center;
+    font-size: 500%;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-decoration: underline;
+}
+
+
+.recherches {
+    border-radius: 10px;
+    outline: 2px solid #FEBF00;
+    border: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: #e2e2e2;
+    outline-offset: 3px;
+    padding: 10px 1rem;
+    transition: 0.25s;
+    margin-bottom: 1em;
+    width: 20%;
+}
+
+.recherches:focus {
+    outline-offset: 5px;
+    background-color: #fff
+}
+
+.btn {
+    width: 130px;
+    height: 40px;
+    font-size: 1.1em;
+    cursor: pointer;
+    background-color: #1E90FF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    transition: all .4s;
+}
+
+.btn:hover {
+    border-radius: 5px;
+    transform: translateY(-10px);
+    box-shadow: 0 7px 0 -2px #f85959,
+        0 15px 0 -4px #32CD32,
+        0 16px 10px -3px #1E90FF;
+}
+
+.btn:active {
+    transition: all 0.2s;
+    transform: translateY(-5px);
+    box-shadow: 0 2px 0 -2px #f85959,
+        0 8px 0 -4px #32CD32,
+        0 12px 10px -3px #1E90FF;
 }
