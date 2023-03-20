@@ -1,28 +1,41 @@
 <!DOCTYPE html>
 <html lang="fr">
 <?php
-    $file = './data/pokedex.json';
-    $data = file_get_contents($file);
-    $obj = json_decode($data);
-    $truc = json_decode($data);
-    if (!empty($_GET['q'])){
-        if (!empty($_GET['rch'])){
-            $obj = array();
-            foreach ($truc as $pokemon){
-                if ($_GET['rch'] == "nom"){
-                    if (strpos($pokemon->name, $_GET['q']) !== false | strpos(strtolower($pokemon->name), $_GET['q']) !== false){
-                        array_push($obj, $pokemon);
-                    }
+$file = './data/pokedex.json';
+$data = file_get_contents($file);
+$obj = json_decode($data);
+$truc = json_decode($data);
+if (!empty($_GET['q'])) {
+    if (!empty($_GET['rch'])) {
+        $obj = array();
+        foreach ($truc as $pokemon) {
+            if ($_GET['rch'] == "nom") {
+                if (strpos($pokemon->name, $_GET['q']) !== false | strpos(strtolower($pokemon->name), $_GET['q']) !== false) {
+                    array_push($obj, $pokemon);
                 }
-                elseif ($_GET['rch'] == "type"){
-                    if (strpos(strtolower($pokemon->type1), strtolower($_GET['q'])) !== false | strpos(strtolower($pokemon->type2), strtolower($_GET['q'])) !== false){
-                        array_push($obj, $pokemon);
-                    }
+            } elseif ($_GET['rch'] == "type") {
+                if (strpos(strtolower($pokemon->type1), strtolower($_GET['q'])) !== false | strpos(strtolower($pokemon->type2), strtolower($_GET['q'])) !== false) {
+                    array_push($obj, $pokemon);
                 }
             }
         }
     }
-    ?>
+}
+
+$tri = $_GET['tri'];
+print_r($tri);
+
+if (!empty($_GET['tri'])){
+    if ($_GET['tri'] == "decroissant"){
+        $k = array_keys($obj);
+        $v = array_values($obj);
+        $rv = array_reverse($v);
+        $obj = array_combine($k,$rv);
+        print($obj[0]->name);
+    }
+}
+?>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,13 +50,18 @@
     <h1>Pokédex</h1>
     <form action="" class="mb-4">
         <div class="form-group">
-            <input type="text" class="recherches" name="q"> 
+            <input type="text" class="recherches" name="q">
         </div>
         <button class="btn">Rechercher</button>
         <p>Rechercher par :</p>
         <select name="rch" id="rch">
             <option value="nom">Nom</option>
             <option value="type">Type</option>
+        </select>
+        <p>Tri :</p>
+        <select name="tri" id="tri">
+            <option value="croissant">Croissant</option>
+            <option value="decroissant">Décroissant</option>
         </select>
     </form>
     <table class="tablepoke">
@@ -64,10 +82,10 @@
                         <?= $poke->name ?>
                     </td>
                     <td>
-                        <?= '<p class="type">'.$poke->type1.'</p>' ?>
+                        <?= '<p class="type">' . $poke->type1 . '</p>' ?>
                     </td>
                     <td>
-                        <?= '<p class="type">'.$poke->type2.'</p>' ?>
+                        <?= '<p class="type">' . $poke->type2 . '</p>' ?>
                     </td>
                     <td>
                         <?= $poke->description ?>
@@ -83,83 +101,92 @@
         </tbody>
     </table>
 </body>
+
 </html>
 
 <script>
+    function triInverse(){
+        var tri  = document.getElementById("tri");
+        if (tri.textContent = "Croissant") {
+            $obj.reverse();
+            tri.textContent = "Décroissant";
+        }
+
+    }
     var types = document.getElementsByClassName("type");
-    for (let i = 0; i<types.length; i++){
+    for (let i = 0; i < types.length; i++) {
         types[i].style.textAlign = 'center';
         types[i].style.borderRadius = '2em';
         types[i].style.margin = '0%';
-        if (types[i].textContent == "Grass"){
+        if (types[i].textContent == "Grass") {
             types[i].style.backgroundColor = '#7BCE52';
             types[i].style.color = 'white';
         }
-        if (types[i].textContent == "Fire"){
+        if (types[i].textContent == "Fire") {
             types[i].style.backgroundColor = '#F75231';
             types[i].style.color = 'white';
         }
-        if (types[i].textContent == "Water"){
+        if (types[i].textContent == "Water") {
             types[i].style.backgroundColor = '#399CFF';
             types[i].style.color = 'white';
         }
-        if (types[i].textContent == "Poison"){
+        if (types[i].textContent == "Poison") {
             types[i].style.backgroundColor = '#B55AA5';
             types[i].style.color = 'white';
         }
-        if (types[i].textContent == "Electric"){
+        if (types[i].textContent == "Electric") {
             types[i].style.backgroundColor = '#FFC631';
             types[i].style.color = 'white';
         }
-        if (types[i].textContent == "Normal"){
+        if (types[i].textContent == "Normal") {
             types[i].style.backgroundColor = '#ADA594';
             types[i].style.color = 'white';
         }
-        if (types[i].textContent == "Bug"){
+        if (types[i].textContent == "Bug") {
             types[i].style.backgroundColor = '#ADBD21';
             types[i].style.color = 'white';
         }
-        if (types[i].textContent == "Fighting"){
+        if (types[i].textContent == "Fighting") {
             types[i].style.backgroundColor = '#A55239';
             types[i].style.color = 'white';
         }
-        if (types[i].textContent == "Psychic"){
+        if (types[i].textContent == "Psychic") {
             types[i].style.backgroundColor = '#FF73A5';
             types[i].style.color = 'white';
         }
-        if (types[i].textContent == "Ground"){
+        if (types[i].textContent == "Ground") {
             types[i].style.backgroundColor = '#D6B55A';
             types[i].style.color = 'white';
         }
-        if (types[i].textContent == "Rock"){
+        if (types[i].textContent == "Rock") {
             types[i].style.backgroundColor = '#BDA55A';
             types[i].style.color = 'white';
         }
-        if (types[i].textContent == "Flying"){
+        if (types[i].textContent == "Flying") {
             types[i].style.backgroundColor = '#9CADF7';
             types[i].style.color = 'white';
         }
-        if (types[i].textContent == "Ghost"){
+        if (types[i].textContent == "Ghost") {
             types[i].style.backgroundColor = '#6363B5';
             types[i].style.color = 'white';
         }
-        if (types[i].textContent == "Ice"){
+        if (types[i].textContent == "Ice") {
             types[i].style.backgroundColor = '#5ACEE7';
             types[i].style.color = 'white';
         }
-        if (types[i].textContent == "Dragon"){
+        if (types[i].textContent == "Dragon") {
             types[i].style.backgroundColor = '#8858F6';
             types[i].style.color = 'white';
         }
-        if (types[i].textContent == "Steel"){
+        if (types[i].textContent == "Steel") {
             types[i].style.backgroundColor = '#ADADC6';
             types[i].style.color = 'white';
         }
-        if (types[i].textContent == "Dark"){
+        if (types[i].textContent == "Dark") {
             types[i].style.backgroundColor = '#735A4A';
             types[i].style.color = 'white';
         }
-        if (types[i].textContent == "Fairy"){
+        if (types[i].textContent == "Fairy") {
             types[i].style.backgroundColor = '#E09AE3';
             types[i].style.color = 'white';
         }

@@ -7,6 +7,15 @@
     border: none;
 }
 
+#sens {
+    background-color: limegreen;
+    color: white;
+    border-radius: 1em;
+    font-size: large;
+    font-style: italic;
+    border: none;
+}
+
 body {
     background-color: black;
     color: white;
