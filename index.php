@@ -4,19 +4,19 @@
     $file = './data/pokedex.json';
     $data = file_get_contents($file);
     $obj = json_decode($data);
-    $truc = array();
+    $truc = json_decode($data);
     if (!empty($_GET['q'])){
         if (!empty($_GET['rch'])){
-            foreach ($obj as $pokemon){
-                $elem = array();
+            $obj = array();
+            foreach ($truc as $pokemon){
                 if ($_GET['rch'] == "nom"){
                     if (strpos(strtolower($pokemon->name), strtolower($_GET['q'])) !== false){
-                        array_push($truc, $pokemon);
+                        array_push($obj, $pokemon);
                     }
                 }
                 elseif ($_GET['rch'] == "type"){
                     if (strpos(strtolower($pokemon->type1), strtolower($_GET['q'])) !== false | strpos(strtolower($pokemon->type2), strtolower($_GET['q'])) !== false){
-                        array_push($truc, $pokemon);
+                        array_push($obj, $pokemon);
                     }
                 }
             }
@@ -58,7 +58,6 @@
             </tr>
         </thead>
         <tbody>
-            <?php if (empty($truc)): ?>
             <?php foreach ($obj as $poke): ?>
                 <tr>
                     <td>
@@ -81,30 +80,6 @@
                     </td>
                 </tr>
             <?php endforeach ?>
-            <?php else: ?>
-                <?php foreach ($truc as $poke): ?>
-                    <tr>
-                        <td>
-                            <?= $poke->name ?>
-                        </td>
-                        <td>
-                            <?= '<p class="type">'.$poke->type1.'</p>' ?>
-                        </td>
-                        <td>
-                            <?= '<p class="type">'.$poke->type2.'</p>' ?>
-                        </td>
-                        <td>
-                            <?= $poke->description ?>
-                        </td>
-                        <td>
-                            <?= $poke->weight ?> kg
-                        </td>
-                        <td>
-                            <?= $poke->height ?> m
-                        </td>
-                    </tr>
-                <?php endforeach ?>
-            <?php endif ?>
         </tbody>
     </table>
 </body>
