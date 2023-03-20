@@ -10,7 +10,7 @@
             $obj = array();
             foreach ($truc as $pokemon){
                 if ($_GET['rch'] == "nom"){
-                    if (strpos($pokemon->name, $_GET['q']) !== false){
+                    if (strpos($pokemon->name, $_GET['q']) !== false | strpos(strtolower($pokemon->name), $_GET['q']) !== false){
                         array_push($obj, $pokemon);
                     }
                 }
